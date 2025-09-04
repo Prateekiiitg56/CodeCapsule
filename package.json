@@ -1,0 +1,76 @@
+{
+  "name": "codecapsule",
+  "displayName": "CodeCapsule",
+  "description": "A Private , offline AI programmer",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:codecapsule.generateProgram",
+    "onCommand:codecapsule.explainCode",
+    "onCommand:codecapsule.findBugs",
+    "onCommand:codecapsule.refactorCode"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+  "commands": [
+    { "command": "codecapsule.explainCode", "title": "CodeCapsule: Explain Code" },
+    { "command": "codecapsule.findBugs", "title": "CodeCapsule: Find Bugs" },
+    { "command": "codecapsule.refactorCode", "title": "CodeCapsule: Refactor Code" },
+    { "command": "codecapsule.generateProgram", "title": "CodeCapsule: Generate Program from this" }
+  ],
+  "menus": {
+    "editor/context": [
+      {
+        "when": "editorHasSelection",
+        "command": "codecapsule.explainCode",
+        "group": "navigation"
+      },
+      {
+        "when": "editorHasSelection",
+        "command": "codecapsule.findBugs",
+        "group": "navigation"
+      },
+      {
+        "when": "editorHasSelection",
+        "command": "codecapsule.refactorCode",
+        "group": "navigation"
+      },
+      {
+        "when": "editorHasSelection",
+        "command": "codecapsule.generateProgram",
+        "group": "navigation"
+      }
+    ]
+  }
+},
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "^14.1.2",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@types/node-fetch": "^2.6.13",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^8.39.0",
+    "@typescript-eslint/parser": "^8.39.0",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^9.32.0",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "markdown-it": "^14.1.0",
+    "node-fetch": "^2.7.0"
+  }
+}

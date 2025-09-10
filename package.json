@@ -18,11 +18,27 @@
   "main": "./out/extension.js",
   "contributes": {
   "commands": [
-    { "command": "codecapsule.explainCode", "title": "CodeCapsule: Explain Code" },
-    { "command": "codecapsule.findBugs", "title": "CodeCapsule: Find Bugs" },
-    { "command": "codecapsule.refactorCode", "title": "CodeCapsule: Refactor Code" },
-    { "command": "codecapsule.generateProgram", "title": "CodeCapsule: Generate Program from this" }
-  ],
+  {
+    "command": "codecapsule.explainCode",
+    "title": "CodeCapsule: Explain Code",
+    "icon": "$(lightbulb)"
+  },
+  {
+    "command": "codecapsule.findBugs",
+    "title": "CodeCapsule: Find Bugs",
+    "icon": "$(bug)"
+  },
+  {
+    "command": "codecapsule.refactorCode",
+    "title": "CodeCapsule: Refactor Code",
+    "icon": "$(wrench)"
+  },
+  {
+    "command": "codecapsule.generateProgram",
+    "title": "CodeCapsule: Generate Program from this",
+    "icon": "$(file-code)"
+  }
+],
   "menus": {
     "editor/context": [
       {

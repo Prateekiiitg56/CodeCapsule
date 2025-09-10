@@ -2,7 +2,6 @@ import * as vscode from 'vscode';
 import fetch from 'node-fetch';
 import MarkdownIt from 'markdown-it';
 
-// Reusable function to stream a response to a VS Code Webview
 async function streamToWebview(prompt: string, panelTitle: string) {
     const panel = vscode.window.createWebviewPanel(
         'codeCapsuleResponse',
@@ -36,7 +35,6 @@ async function streamToWebview(prompt: string, panelTitle: string) {
                     panel.webview.postMessage({ command: 'update', html: htmlContent });
                 }
             } catch (e) {
-                // Ignore parsing errors from incomplete chunks
             }
         }
         panel.webview.postMessage({ command: 'complete' });
@@ -47,10 +45,8 @@ async function streamToWebview(prompt: string, panelTitle: string) {
     }
 }
 
-// This is the main function that runs when your extension is activated
 export function activate(context: vscode.ExtensionContext) {
 
-    // 1. Explain Code Command
     const explainDisposable = vscode.commands.registerCommand('codecapsule.explainCode', async () => {
         const editor = vscode.window.activeTextEditor;
         if (editor && editor.selection) {
@@ -62,7 +58,6 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 
-    // 2. Find Bugs Command
     const findBugsDisposable = vscode.commands.registerCommand('codecapsule.findBugs', async () => {
         const editor = vscode.window.activeTextEditor;
         if (editor && editor.selection) {
@@ -74,7 +69,6 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 
-    // 3. Refactor Code Command
     const refactorDisposable = vscode.commands.registerCommand('codecapsule.refactorCode', async () => {
         const editor = vscode.window.activeTextEditor;
         if (editor && editor.selection) {
@@ -86,7 +80,6 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 
-    // 4. Generate Program Command
     const generateProgramDisposable = vscode.commands.registerCommand('codecapsule.generateProgram', async () => {
         const editor = vscode.window.activeTextEditor;
         if (editor && editor.selection) {
@@ -98,7 +91,6 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 
-    // Add all command subscriptions to the context
     context.subscriptions.push(
         explainDisposable,
         findBugsDisposable,
@@ -107,10 +99,8 @@ export function activate(context: vscode.ExtensionContext) {
     );
 }
 
-// This function runs when your extension is deactivated
 export function deactivate() { }
 
-// This is a helper function to generate the HTML content for the webview
 function getWebviewContent(initialContent: string): string {
     return `<!DOCTYPE html>
     <html lang="en">
@@ -119,19 +109,37 @@ function getWebviewContent(initialContent: string): string {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>CodeCapsule Response</title>
         <style>
-            body { 
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            body {
+                /* Use VS Code's theme colors for a native feel */
+                background-color: var(--vscode-sideBar-background);
+                color: var(--vscode-foreground);
+                font-family: var(--vscode-font-family);
                 line-height: 1.6;
-                padding: 1em;
+                padding: 1.5em;
+            }
+            .header {
+                display: flex;
+                align-items: center;
+                padding-bottom: 1em;
+                border-bottom: 1px solid var(--vscode-sideBar-border);
+                margin-bottom: 1em;
+            }
+            .header-icon {
+                font-size: 1.5em;
+                margin-right: 0.5em;
+            }
+            .header-title {
+                font-size: 1.2em;
+                font-weight: 600;
             }
             code {
-                background-color: rgba(0,0,0,0.2);
+                background-color: var(--vscode-textCodeBlock-background);
                 padding: 0.2em 0.4em;
                 border-radius: 3px;
-                font-family: 'Courier New', Courier, monospace;
+                font-family: var(--vscode-editor-font-family);
             }
             pre {
-                background-color: rgba(0,0,0,0.2);
+                background-color: var(--vscode-textCodeBlock-background);
                 padding: 1em;
                 border-radius: 5px;
                 white-space: pre-wrap;
@@ -150,8 +158,13 @@ function getWebviewContent(initialContent: string): string {
         </style>
     </head>
     <body>
+        <div class="header">
+            <span class="header-icon">💊</span>
+            <span class="header-title">CodeCapsule</span>
+        </div>
         <div id="response">${initialContent}</div>
         <span id="cursor" class="cursor"></span>
+
         <script>
             const vscode = acquireVsCodeApi();
             const responseElement = document.getElementById('response');
@@ -171,4 +184,4 @@ function getWebviewContent(initialContent: string): string {
         </script>
     </body>
     </html>`;
-}
+} 

@@ -114,7 +114,7 @@ Make sure you have the following installed on your system:
 
 1.  **Clone the repository:**
     ```sh
-    git clone [https://github.com/your_username/CodeCapsule.git](https://github.com/your_username/CodeCapsule.git)
+    git clone [https://github.com/prateekiiitg56/CodeCapsule.git](https://github.com/prateekiiitg56/CodeCapsule.git)
     cd CodeCapsule
     ```
 2.  **Download the AI Model:**

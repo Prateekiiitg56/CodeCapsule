@@ -1,6 +1,6 @@
 # CodeCapsule 💊
 
-**A private, offline-first AI coding assistant for Visual Studio Code, powered by local, open-weight models.**
+**A private, offline AI coding assistant for Visual Studio Code, powered by local, open-weight models.**
 
 ![Status](https://img.shields.io/badge/status-in_development-green)
 ![License](https://img.shields.io/badge/license-MIT-blue)

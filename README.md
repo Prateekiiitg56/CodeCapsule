@@ -147,7 +147,3 @@ Make sure you have the following installed on your system:
 
 2.  **Use the Features:** In the Extension Development Host window (launched with F5), open any code file, select a piece of text (either code or a comment), and right-click on it. You will see the "CodeCapsule" options in the context menu.
 
----
-## ## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
